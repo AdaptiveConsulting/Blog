@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "antlr4-MyGrammar",
+            "type": "antlr-debug",
+            "request": "launch",
+            "input": "input.txt",
+            "grammar": "MyGrammar.g4",
+            "startRule": "expr",
+            "printParseTree": true,
+            "visualParseTree": true
+        }
+    ]
+}
