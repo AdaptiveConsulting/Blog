@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net471</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Include Antlr4.Runtime -->
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.7.1.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Remove="Expressions\Generated\*.interp" />
+        <None Remove="Expressions\Generated\*.tokens" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\ExpressionParser.ReferentialData\ExpressionParser.ReferentialData.csproj" />
+    </ItemGroup>
+    
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <ItemGroup>
+            <!-- Use Compile Remove to delete generated files -->
+            <Compile Remove="Expressions\Generated\*.cs" />
+        </ItemGroup>
+        <!-- Remove Generated dir.-->
+        <RemoveDir Directories="$(ProjectDir)Expressions\Generated" />
+        <!-- Run ANTLR on the grammar -->
+        <Exec Command="java -jar $(SolutionDir)\tools\antlr-4.7.1-complete.jar $(ProjectDir)Expressions\Grammar\MyGrammar.g4 -o $(ProjectDir)Expressions\Generated -Dlanguage=CSharp -no-listener -visitor -package $(ProjectName).Expressions.Generated" />
+        <ItemGroup>
+            <!-- Include generated C# files -->
+            <Compile Include="Expressions\Generated\*.cs" />
+        </ItemGroup>
+    </Target>
+    
+</Project>
