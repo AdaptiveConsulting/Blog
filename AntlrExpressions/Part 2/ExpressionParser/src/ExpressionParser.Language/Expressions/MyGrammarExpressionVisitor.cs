@@ -5,55 +5,53 @@ using ExpressionParser.Language.Expressions.Generated;
 
 namespace ExpressionParser.Language.Expressions
 {
-    // because we're parsing 'terms' that we'll need to hydrate first with additional information, 
-    // we need to have an intermediate step that will give us the opportunity to go and fetch
-    // the necessary information (i.e. value of currency pair, or uom conversion factors) and set 
-    // the values first, before we get the final result of our "expression"
-    public class MyGrammarExpressionVisitor : MyGrammarBaseVisitor<Func<IReadOnlyList<IGrammarTerm>, decimal>>
+    public class MyGrammarExpressionVisitor : MyGrammarBaseVisitor<Func<IReadOnlyList<ExpressionTerm>, decimal>>
     {
-        private readonly List<IGrammarTerm> _terms = new List<IGrammarTerm>();
-        public IReadOnlyList<IGrammarTerm> Terms => _terms.AsReadOnly();
+        private readonly List<ExpressionTerm> _terms = new List<ExpressionTerm>();
+        public IReadOnlyList<ExpressionTerm> Terms => _terms.AsReadOnly();
         
-        // Math operators
-        // ignore any input for these, as they always return a number we can just work with them.
-        public override Func<IReadOnlyList<IGrammarTerm>, decimal> VisitNum(MyGrammarParser.NumContext context)
+        public override Func<IReadOnlyList<ExpressionTerm>, decimal> VisitNum(MyGrammarParser.NumContext context)
         {
-            // ignore any input here, as this is a number we can just return it.
             return _ => decimal.Parse(context.GetText());
         }
 
-        public override Func<IReadOnlyList<IGrammarTerm>, decimal> VisitMulDiv(MyGrammarParser.MulDivContext context)
+        public override Func<IReadOnlyList<ExpressionTerm>, decimal> VisitMulDiv(MyGrammarParser.MulDivContext context)
         {
             var left = Visit(context.expr(0));
             var right = Visit(context.expr(1));
 
             if (context.op.Type == MyGrammarParser.MUL) return x => left(x) * right(x);
-            return _ => left(_) / right(_);
+            return x => left(x) / right(x);
         }
 
-        public override Func<IReadOnlyList<IGrammarTerm>, decimal> VisitAddSub(MyGrammarParser.AddSubContext context)
+        public override Func<IReadOnlyList<ExpressionTerm>, decimal> VisitAddSub(MyGrammarParser.AddSubContext context)
         {
             var left = Visit(context.expr(0));
             var right = Visit(context.expr(1));
 
             if (context.op.Type == MyGrammarParser.ADD) return x => left(x) + right(x);
-            return _ => left(_) - right(_);
+            return x => left(x) - right(x);
         }
 
-        public override Func<IReadOnlyList<IGrammarTerm>, decimal> VisitUomConvertFunc(MyGrammarParser.UomConvertFuncContext context)
+        public override Func<IReadOnlyList<ExpressionTerm>, decimal> VisitFxRateFunc(MyGrammarParser.FxRateFuncContext context)
+        {
+            var currencyPair = context.currencyPair().GetText();
+            _terms.Add(new ExpressionTerm(currencyPair));
+            return x => x.First(y => y.TermId == currencyPair).Value;
+        }
+
+        public override Func<IReadOnlyList<ExpressionTerm>, decimal> VisitUomConvertFunc(MyGrammarParser.UomConvertFuncContext context)
         {
             var fromUom = context.fromUomCode().GetText();
             var toUom = context.toUomCode().GetText();
             var fromToUomConversionCode = $"{fromUom}{toUom}";
-            // Todo: Come back to this ID.
-            _terms.Add(new UomConvertTerm(fromToUomConversionCode, fromUom, toUom)); 
+            _terms.Add(new ExpressionTerm(fromToUomConversionCode)); // Todo: think of a better way.
             return x => x.First(t => t.TermId == fromToUomConversionCode).Value;
         }
 
-        public override Func<IReadOnlyList<IGrammarTerm>, decimal> VisitParens(MyGrammarParser.ParensContext context)
+        public override Func<IReadOnlyList<ExpressionTerm>, decimal> VisitParens(MyGrammarParser.ParensContext context)
         {
-            // if we have a parenthesis, there's an expression inside
-            // (that can be any of the allowed operators), so we visit that. 
+            // if we have a parenthesis, there's an expression inside (that can be any of the allowed operators), so we visit that. 
             return Visit(context.expr());
         }
     }
