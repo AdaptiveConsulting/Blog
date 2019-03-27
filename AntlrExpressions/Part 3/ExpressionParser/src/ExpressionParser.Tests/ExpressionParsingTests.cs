@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ExpressionParser.Language.Expressions;
+using ExpressionParser.Language.Expressions.Generated;
 using NUnit.Framework;
 
 namespace ExpressionParser.Tests
@@ -11,7 +13,7 @@ namespace ExpressionParser.Tests
         {
             const string numberExpression = "2";
             var evaluator = MyGrammarExpressionEvaluator.EvaluateExpression(numberExpression);
-            var result = evaluator.Invoke(new List<ExpressionTerm>());
+            var result = evaluator.function.Invoke(new List<IGrammarTerm>());
             
             Assert.That(result, Is.EqualTo(2m));
         }
@@ -26,9 +28,26 @@ namespace ExpressionParser.Tests
         public void BasicMathsWork(string numberExpression, decimal expectedResult)
         {
             var evaluator = MyGrammarExpressionEvaluator.EvaluateExpression(numberExpression);
-            var result = evaluator.Invoke(new List<ExpressionTerm>());
+            var result = evaluator.function.Invoke(new List<IGrammarTerm>());
             
             Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void UomFactorWorks()
+        {
+            ITermVisitor myTermVisitor = new MyTermVisitor();
+            const string inputFunction = "2*UomConvert(MT,Kg)";
+            
+            var (function, rawTerms) = 
+                MyGrammarExpressionEvaluator.EvaluateExpression(inputFunction);
+            
+            rawTerms.ToList().ForEach(t => t.Accept(myTermVisitor)); // hydrate
+            var hydratedTerms = myTermVisitor.GetAllTerms();
+            
+            var result = function.Invoke(hydratedTerms);
+            
+            Assert.That(result, Is.EqualTo(2000m));
         }
     }
 }
