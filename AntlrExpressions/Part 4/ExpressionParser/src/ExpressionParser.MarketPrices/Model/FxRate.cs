@@ -1,4 +1,4 @@
-namespace ExpressionParser.MarketPrices
+namespace ExpressionParser.MarketPrices.Model
 {
     public class FxRate
     {

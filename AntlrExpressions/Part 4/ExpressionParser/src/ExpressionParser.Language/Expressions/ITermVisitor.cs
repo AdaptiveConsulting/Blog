@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ExpressionParser.MarketPrices.Model;
 
 namespace ExpressionParser.Language.Expressions
 {
@@ -6,5 +7,6 @@ namespace ExpressionParser.Language.Expressions
     {
         IReadOnlyList<IGrammarTerm> GetAllTerms();
         void Visit(UomConvertTerm uomConversionTerm);
+        void Visit(FxRateTerm uomConversionTerm);
     }
 }

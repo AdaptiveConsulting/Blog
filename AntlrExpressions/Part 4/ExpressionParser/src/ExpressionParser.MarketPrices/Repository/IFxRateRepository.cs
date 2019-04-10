@@ -1,6 +1,7 @@
 ﻿using System;
+using ExpressionParser.MarketPrices.Model;
 
-namespace ExpressionParser.MarketPrices
+namespace ExpressionParser.MarketPrices.Repository
 {
     public interface IFxRateRepository
     {

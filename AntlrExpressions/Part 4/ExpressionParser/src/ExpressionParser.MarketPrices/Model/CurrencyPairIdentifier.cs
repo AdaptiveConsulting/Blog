@@ -1,11 +1,12 @@
 using System;
 
-namespace ExpressionParser.MarketPrices
+namespace ExpressionParser.MarketPrices.Model
 {
     public class CurrencyPairIdentifier : IEquatable<CurrencyPairIdentifier>
     {
         public string BaseCurrency { get; }
         public string ContraCurrency { get; }
+        public string Symbol => $"{BaseCurrency}{ContraCurrency}";
 
         public CurrencyPairIdentifier(string baseCurrency,
             string contraCurrency)
