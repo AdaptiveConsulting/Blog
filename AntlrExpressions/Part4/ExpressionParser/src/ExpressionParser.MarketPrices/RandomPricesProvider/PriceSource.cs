@@ -10,7 +10,7 @@ using ExpressionParser.MarketPrices.Model;
 namespace ExpressionParser.MarketPrices.RandomPricesProvider
 {
     /// <summary>
-    /// A modified cut-down PriceSource from
+    /// A modified cut-down PriceSource class from
     /// https://github.com/AdaptiveConsulting/ReactiveTraderCloud/blob/develop/src/server/Adaptive.ReactiveTrader.Server.Pricing/PriceSource.cs
     /// This class is meant to act as an infinite source of random prices for currency pairs.
     /// It provides an Observable sequence that anyone can subscribe to 

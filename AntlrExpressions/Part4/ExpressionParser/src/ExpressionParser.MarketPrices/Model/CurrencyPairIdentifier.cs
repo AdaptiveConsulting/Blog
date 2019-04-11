@@ -15,6 +15,17 @@ namespace ExpressionParser.MarketPrices.Model
             ContraCurrency = contraCurrency;
         }
 
+        public static CurrencyPairIdentifier ParseExact(string currencyPair)
+        {
+            if (currencyPair.Length != 6)
+                throw new ArgumentException("Invalid currency pair.");
+
+            var baseCurrency = currencyPair.Substring(0, 3);
+            var contraCurrency = currencyPair.Substring(3, 3);
+
+            return new CurrencyPairIdentifier(baseCurrency, contraCurrency);
+        }
+
         public bool Equals(CurrencyPairIdentifier other)
         {
             if (ReferenceEquals(null, other)) return false;

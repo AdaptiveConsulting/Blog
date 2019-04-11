@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace ExpressionParser.Tests
 {
+    [TestFixture]
     public class ExpressionParsingTests
     {
         [Test]
@@ -48,6 +49,23 @@ namespace ExpressionParser.Tests
             var result = function.Invoke(hydratedTerms);
             
             Assert.That(result, Is.EqualTo(2000m));
+        }
+
+        [Test]
+        public void FxRateTicksWork()
+        {
+            ITermVisitor myTermVisitor = new MyTermVisitor();
+            const string inputFunction = "FXRate(EURUSD)";
+            
+            var (function, rawTerms) = 
+                MyGrammarExpressionEvaluator.EvaluateExpression(inputFunction);
+            
+            rawTerms.ToList().ForEach(t => t.Accept(myTermVisitor)); // hydrate
+            var hydratedTerms = myTermVisitor.GetAllTerms();
+            
+            var result = function.Invoke(hydratedTerms);
+            
+            Assert.That(result, Is.EqualTo(1.09443m));
         }
     }
 }

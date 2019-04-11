@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExpressionParser.Language.Expressions.Generated;
+using ExpressionParser.MarketPrices.Model;
 
 namespace ExpressionParser.Language.Expressions
 {
@@ -55,6 +56,16 @@ namespace ExpressionParser.Language.Expressions
             // if we have a parenthesis, there's an expression inside
             // (that can be any of the allowed operators), so we visit that. 
             return Visit(context.expr());
+        }
+
+        public override Func<IReadOnlyList<IGrammarTerm>, decimal> VisitFxRateFunc(MyGrammarParser.FxRateFuncContext context)
+        {
+            // todo test this
+            var termId = context.GetText();
+            var currencyPair = context.currencyPair().GetText();
+            var term = new FxRateTerm(termId, CurrencyPairIdentifier.ParseExact(currencyPair));
+            _terms.Add(term);
+            return x => x.First(t => t.TermId == term.TermId).Value;
         }
     }
 }

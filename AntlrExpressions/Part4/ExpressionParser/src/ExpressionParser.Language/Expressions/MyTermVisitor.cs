@@ -24,13 +24,15 @@ namespace ExpressionParser.Language.Expressions
 
         public void Visit(FxRateTerm fxRateTerm)
         {
-            var prices = _fxRateRepository.GetPricesFor(fxRateTerm.Identifier).Take(1);
-            var latestPriceSubscription = prices.Subscribe(rate =>
-            {
-                fxRateTerm.SetValue(rate.Rate);
-            });
+            var priceStream = _fxRateRepository.GetPricesFor(fxRateTerm.Identifier).Take(1);
+            var latestPriceSubscription =
+                priceStream
+                    .Take(1)
+                    .Subscribe(rate => { fxRateTerm.SetValue(rate.Rate); });
 
             latestPriceSubscription.Dispose();
+            
+            _terms.Add(fxRateTerm);
         }
     }
 }
