@@ -12,14 +12,14 @@ namespace ExpressionParser.MarketPrices.Repository
         /// https://github.com/AdaptiveConsulting/ReactiveTraderCloud/blob/develop/src/server/Adaptive.ReactiveTrader.Server.Pricing/PriceSource.cs
         /// This class is meant to act as an infinite source of random prices for currency pairs.
         /// It provides an Observable sequence that anyone can subscribe to 
-        private readonly PriceSource _source;
+        private readonly IPriceSource _source;
 
         public IReadOnlyCollection<CurrencyPairIdentifier> KnownCurrencies =>
             _source.KnownCurrencyPairs;
 
-        public FxRateRepository()
+        public FxRateRepository(IPriceSource priceSource)
         {
-            _source = new PriceSource();
+            _source = priceSource;
         }
 
         public IObservable<FxRate> GetPricesFor(CurrencyPairIdentifier currencyPair)

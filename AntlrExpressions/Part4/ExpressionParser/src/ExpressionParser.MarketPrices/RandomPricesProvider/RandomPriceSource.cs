@@ -15,7 +15,7 @@ namespace ExpressionParser.MarketPrices.RandomPricesProvider
     /// This class is meant to act as an infinite source of random prices for currency pairs.
     /// It provides an Observable sequence that anyone can subscribe to 
     /// </summary>
-    public sealed class PriceSource : IDisposable
+    public sealed class RandomPriceSource : IDisposable, IPriceSource
     {
         private static readonly Random Random = new Random();
         private const int Precision = 5;
@@ -33,7 +33,7 @@ namespace ExpressionParser.MarketPrices.RandomPricesProvider
         public IReadOnlyList<CurrencyPairIdentifier> KnownCurrencyPairs =>
             _priceGenerators.Select(x => x.Identifier).Distinct().ToList();
 
-        public PriceSource()
+        public RandomPriceSource()
         {
             _timer = Observable.Interval(TimeSpan.FromMilliseconds(50)).Publish();
 

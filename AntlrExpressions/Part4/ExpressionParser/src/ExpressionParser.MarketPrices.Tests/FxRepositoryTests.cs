@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using ExpressionParser.MarketPrices.Model;
+using ExpressionParser.MarketPrices.RandomPricesProvider;
 using ExpressionParser.MarketPrices.Repository;
 using NUnit.Framework;
 
@@ -16,7 +17,11 @@ namespace ExpressionParser.MarketPrices.Tests
         private IDisposable _subscription;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp() => _sut = new FxRateRepository();
+        public void OneTimeSetUp()
+        {
+            var priceSource = new RandomPriceSource();
+            _sut = new FxRateRepository(priceSource);
+        }
 
 
         [OneTimeTearDown]

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
+using ExpressionParser.MarketPrices.RandomPricesProvider;
 using ExpressionParser.MarketPrices.Repository;
 using ExpressionParser.ReferentialData;
 using ExpressionParser.ReferentialData.UoM;
@@ -11,7 +12,9 @@ namespace ExpressionParser.Language.Expressions
     {
         private List<IGrammarTerm> _terms = new List<IGrammarTerm>();
         private readonly IUnitConverter _unitConverter = new UnitConverter();
-        private readonly IFxRateRepository _fxRateRepository = new FxRateRepository();
+        
+        // TODO use a container for this type of thing.
+        private readonly IFxRateRepository _fxRateRepository = new FxRateRepository(new RandomPriceSource());
         
         public IReadOnlyList<IGrammarTerm> GetAllTerms() => _terms.AsReadOnly();
         
