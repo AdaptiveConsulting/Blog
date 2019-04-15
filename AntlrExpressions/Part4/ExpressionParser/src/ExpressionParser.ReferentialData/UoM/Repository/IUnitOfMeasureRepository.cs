@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ExpressionParser.ReferentialData.Repository
+namespace ExpressionParser.ReferentialData.UoM.Repository
 {
     public interface IUnitOfMeasureRepository
     {

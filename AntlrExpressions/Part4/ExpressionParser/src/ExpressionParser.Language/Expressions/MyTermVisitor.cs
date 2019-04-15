@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using ExpressionParser.MarketPrices.Repository;
 using ExpressionParser.ReferentialData;
+using ExpressionParser.ReferentialData.UoM;
 
 namespace ExpressionParser.Language.Expressions
 {

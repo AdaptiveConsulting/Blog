@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace ExpressionParser.ReferentialData
+namespace ExpressionParser.ReferentialData.UoM
 {
     public interface IUnitConverter
     {

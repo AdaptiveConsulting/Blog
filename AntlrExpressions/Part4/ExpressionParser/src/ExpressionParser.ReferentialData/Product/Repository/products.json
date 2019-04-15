@@ -1,0 +1,11 @@
+{
+  "Products": [
+    {"Name": "P1", "PriceExpression": "5 * FXRate(EURUSD) * UomConvert(Kg, MT)"},
+    {"Name": "P2", "PriceExpression": "5 * FXRate(EURUSD) * UomConvert(Kg, MT)"},
+    {"Name": "P3", "PriceExpression": "5 * FXRate(EURUSD) * UomConvert(Kg, MT)"},
+    {"Name": "P4", "PriceExpression": "5 * FXRate(EURUSD) * UomConvert(Kg, MT)"},
+    {"Name": "P5", "PriceExpression": "5 * FXRate(EURUSD) * UomConvert(Kg, MT)"},
+    {"Name": "P6", "PriceExpression": "5 * FXRate(EURUSD) * UomConvert(Kg, MT)"},
+    {"Name": "P7", "PriceExpression": "5 * FXRate(EURUSD) * UomConvert(Kg, MT)"}
+  ]
+}

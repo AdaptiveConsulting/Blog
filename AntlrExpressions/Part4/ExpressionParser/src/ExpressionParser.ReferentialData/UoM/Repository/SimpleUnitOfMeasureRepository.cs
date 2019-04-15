@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ExpressionParser.ReferentialData.Repository
+namespace ExpressionParser.ReferentialData.UoM.Repository
 {
     // This simple UOM repo, knows about a *few* units of measure. There are definitely a few more :)
     public class SimpleUnitOfMeasureRepository : IUnitOfMeasureRepository

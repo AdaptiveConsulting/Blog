@@ -1,6 +1,6 @@
-using ExpressionParser.ReferentialData.Repository;
+using ExpressionParser.ReferentialData.UoM.Repository;
 
-namespace ExpressionParser.ReferentialData
+namespace ExpressionParser.ReferentialData.UoM
 {
     public class UnitConverter : IUnitConverter
     {

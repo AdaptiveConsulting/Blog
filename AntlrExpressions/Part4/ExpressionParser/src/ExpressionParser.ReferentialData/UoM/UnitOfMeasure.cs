@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ExpressionParser.ReferentialData
+﻿namespace ExpressionParser.ReferentialData.UoM
 {
     public class UnitOfMeasure
     {
