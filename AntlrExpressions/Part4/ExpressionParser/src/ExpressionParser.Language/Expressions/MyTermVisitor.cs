@@ -10,11 +10,17 @@ namespace ExpressionParser.Language.Expressions
 {
     public class MyTermVisitor : ITermVisitor
     {
-        private List<IGrammarTerm> _terms = new List<IGrammarTerm>();
-        private readonly IUnitConverter _unitConverter = new UnitConverter();
+        private readonly List<IGrammarTerm> _terms = new List<IGrammarTerm>();
+        private readonly IUnitConverter _unitConverter;
         
         // TODO use a container for this type of thing.
-        private readonly IFxRateRepository _fxRateRepository = new FxRateRepository(new RandomPriceSource());
+        private readonly IFxRateRepository _fxRateRepository; // = new FxRateRepository(new RandomPriceSource());
+
+        public MyTermVisitor(IUnitConverter unitConverter, IFxRateRepository fxRateRepository)
+        {
+            _unitConverter = unitConverter;
+            _fxRateRepository = fxRateRepository;
+        }
         
         public IReadOnlyList<IGrammarTerm> GetAllTerms() => _terms.AsReadOnly();
         

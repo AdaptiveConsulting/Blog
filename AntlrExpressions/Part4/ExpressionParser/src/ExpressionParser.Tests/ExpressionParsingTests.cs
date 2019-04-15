@@ -2,6 +2,9 @@
 using System.Linq;
 using ExpressionParser.Language.Expressions;
 using ExpressionParser.Language.Expressions.Generated;
+using ExpressionParser.MarketPrices.Repository;
+using ExpressionParser.ReferentialData.UoM;
+using ExpressionParser.Tests.Common;
 using NUnit.Framework;
 
 namespace ExpressionParser.Tests
@@ -37,7 +40,7 @@ namespace ExpressionParser.Tests
         [Test]
         public void UomFactorWorks()
         {
-            ITermVisitor myTermVisitor = new MyTermVisitor();
+            ITermVisitor myTermVisitor = new MyTermVisitor(new UnitConverter(), new FxRateRepository(new TestFxPriceSourceStub()));
             const string inputFunction = "2*UomConvert(MT,Kg)";
             
             var (function, rawTerms) = 
@@ -54,7 +57,8 @@ namespace ExpressionParser.Tests
         [Test]
         public void FxRateTicksWork()
         {
-            ITermVisitor myTermVisitor = new MyTermVisitor();
+            // Add test price source.
+            ITermVisitor myTermVisitor = new MyTermVisitor(new UnitConverter(), new FxRateRepository(new TestFxPriceSourceStub()));
             const string inputFunction = "FXRate(EURUSD)";
             
             var (function, rawTerms) = 
@@ -67,7 +71,7 @@ namespace ExpressionParser.Tests
 
             // the actual rate is not testable as is.
             // we'll come back to this hence the (within)
-            Assert.That(result, Is.EqualTo(1.0).Within(0.1m));
+            Assert.That(result, Is.EqualTo(1m));
         }
     }
 }

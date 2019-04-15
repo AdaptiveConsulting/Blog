@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExpressionParser.Language\ExpressionParser.Language.csproj" />
+    <ProjectReference Include="..\ExpressionParser.Tests.Common\ExpressionParser.Tests.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

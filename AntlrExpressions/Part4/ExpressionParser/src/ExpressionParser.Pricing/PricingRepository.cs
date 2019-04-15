@@ -2,16 +2,22 @@ using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ExpressionParser.Language.Expressions;
+using ExpressionParser.MarketPrices.Repository;
 using ExpressionParser.ReferentialData.Product;
+using ExpressionParser.ReferentialData.UoM;
 
 namespace ExpressionParser.Pricing
 {
     public class PricingRepository : IPricingRepository
     {
+        private readonly IUnitConverter _unitConverter;
+        private readonly IFxRateRepository _fxRateRepository;
         private readonly IProductRepository _productRepository;
 
-        public PricingRepository(IProductRepository productRepository)
+        public PricingRepository(IUnitConverter unitConverter, IFxRateRepository fxRateRepository, IProductRepository productRepository)
         {
+            _unitConverter = unitConverter;
+            _fxRateRepository = fxRateRepository;
             _productRepository = productRepository;
         }
 
@@ -27,7 +33,7 @@ namespace ExpressionParser.Pricing
                 {
                     var (calculatorFunction, rawTerms) = MyGrammarExpressionEvaluator.EvaluateExpression(product.PriceExpression);
 
-                    var visitor = new MyTermVisitor();
+                    var visitor = new MyTermVisitor(_unitConverter, _fxRateRepository);
                     foreach (var term in rawTerms)
                     {
                         term.Accept(visitor);
