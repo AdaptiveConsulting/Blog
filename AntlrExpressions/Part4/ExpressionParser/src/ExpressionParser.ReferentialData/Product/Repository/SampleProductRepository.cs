@@ -10,20 +10,35 @@ namespace ExpressionParser.ReferentialData.Product
 {
     public class SampleProductRepository : IProductRepository
     {
-        private readonly IDictionary<string, Product> _products;
+        private const string ProductsJson = "products.json";
+        private readonly IDictionary<string, Product> _productsCache;
 
         public SampleProductRepository()
         {
-            var allLines = File.ReadAllText("products.json ");
+            var allLines = File.ReadAllText(ProductsJson);
             var products = JsonConvert.DeserializeObject<List<Product>>(allLines).AsEnumerable();
-            _products = products.ToDictionary(x => x.Name);
+            _productsCache = products.ToDictionary(x => x.Name);
         }
         
         public IObservable<IEnumerable<Product>> GetAll()
         {
             return Observable.Create<IEnumerable<Product>>(obs =>
             {
-                obs.OnNext(_products.Values.AsEnumerable());
+                obs.OnNext(_productsCache.Values.AsEnumerable());
+                return Disposable.Empty;
+            });
+        }
+
+        public IObservable<Product> GetProduct(string productName)
+        {
+            return Observable.Create<Product>(obs =>
+            {
+                if (_productsCache.ContainsKey(productName))
+                {
+                    obs.OnNext(_productsCache[productName]);
+                }
+                
+                // do nothing for now. 
                 return Disposable.Empty;
             });
         }

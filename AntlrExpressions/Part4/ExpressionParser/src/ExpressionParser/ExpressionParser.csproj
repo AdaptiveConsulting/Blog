@@ -13,5 +13,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net471</TargetFramework>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ExpressionParser.Pricing\ExpressionParser.Pricing.csproj" />
+  </ItemGroup>
 
 </Project>
