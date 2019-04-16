@@ -33,6 +33,7 @@ namespace ExpressionParser.MarketPrices.RandomPricesProvider
 
         public IEnumerable<FxRate> Sequence()
         {
+            
             var previousMid = _initial;
             while (true)
             {
@@ -41,6 +42,7 @@ namespace ExpressionParser.MarketPrices.RandomPricesProvider
                 var mid = Format(previousMid);
                 yield return new FxRate(Identifier, mid);
             }
+            // ReSharper disable once IteratorNeverReturns
         }
 
         private decimal Format(decimal price)

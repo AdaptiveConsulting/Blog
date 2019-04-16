@@ -9,10 +9,4 @@
       <PackageReference Include="System.Reactive" Version="4.1.5" />
     </ItemGroup>
 
-    <ItemGroup>
-      <None Update="Product\Repository\products.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>

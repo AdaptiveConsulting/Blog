@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using ExpressionParser.Language.Expressions;
-using ExpressionParser.Language.Expressions.Generated;
 using ExpressionParser.MarketPrices.Repository;
 using ExpressionParser.ReferentialData.UoM;
 using ExpressionParser.Tests.Common;
@@ -47,7 +50,19 @@ namespace ExpressionParser.Tests
                 MyGrammarExpressionEvaluator.EvaluateExpression(inputFunction);
             
             rawTerms.ToList().ForEach(t => t.Accept(myTermVisitor)); // hydrate
-            var hydratedTerms = myTermVisitor.GetAllTerms();
+            var hydratedTerms = new List<IGrammarTerm>();
+
+            var signal = new AutoResetEvent(false);
+
+            var disposable = myTermVisitor.GetAllTerms().Take(1).Subscribe(terms =>
+            {
+                hydratedTerms.AddRange(terms);
+                signal.Set();
+            });
+
+            signal.WaitOne();
+
+            disposable.Dispose();
             
             var result = function.Invoke(hydratedTerms);
             
@@ -55,7 +70,7 @@ namespace ExpressionParser.Tests
         }
 
         [Test]
-        public void FxRateTicksWork()
+        public async Task FxRateTicksWork()
         {
             // Add test price source.
             ITermVisitor myTermVisitor = new MyTermVisitor(new UnitConverter(), new FxRateRepository(new TestFxPriceSourceStub()));
@@ -65,9 +80,10 @@ namespace ExpressionParser.Tests
                 MyGrammarExpressionEvaluator.EvaluateExpression(inputFunction);
             
             rawTerms.ToList().ForEach(t => t.Accept(myTermVisitor)); // hydrate
-            var hydratedTerms = myTermVisitor.GetAllTerms();
-            
-            var result = function.Invoke(hydratedTerms);
+
+            var hydratedTerms = await myTermVisitor.GetAllTerms().Take(1);
+
+            var result = function.Invoke(hydratedTerms as IReadOnlyList<IGrammarTerm>);
 
             // the actual rate is not testable as is.
             // we'll come back to this hence the (within)

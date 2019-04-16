@@ -15,6 +15,16 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <None Remove="products.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="products.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\ExpressionParser.Pricing\ExpressionParser.Pricing.csproj" />
   </ItemGroup>
 
