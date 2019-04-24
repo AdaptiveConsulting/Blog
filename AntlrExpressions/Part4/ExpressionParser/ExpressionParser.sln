@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionParser", "src\ExpressionParser\ExpressionParser.csproj", "{34433E18-FBE3-4220-8E20-54A8BF911AF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B6031F77-464B-41B6-AE62-FC663849875A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C2019521-CB20-457D-B05E-BF4097F74EA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionParser.Tests", "src\ExpressionParser.Tests\ExpressionParser.Tests.csproj", "{D513466E-6203-4CB9-89EF-F68E2FD35FC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionParser.Language", "src\ExpressionParser.Language\ExpressionParser.Language.csproj", "{85520D10-E76A-4B8C-8E08-A3756FBC3315}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D38AAA2-97E8-4A74-BF1B-BA916E5EBD6A}"
+ProjectSection(SolutionItems) = preProject
+	Directory.Build.props = Directory.Build.props
+EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionParser.ReferentialData", "src\ExpressionParser.ReferentialData\ExpressionParser.ReferentialData.csproj", "{3FE1792F-CAC2-422E-B6E1-53FEA34BEA05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionParser.MarketPrices", "src\ExpressionParser.MarketPrices\ExpressionParser.MarketPrices.csproj", "{5D7CFD3E-F808-4369-8DA8-EAF20E68B73A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionParser.MarketPrices.Tests", "src\ExpressionParser.MarketPrices.Tests\ExpressionParser.MarketPrices.Tests.csproj", "{3817A70A-7C02-49CA-82DC-823C810F4828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionParser.Pricing", "src\ExpressionParser.Pricing\ExpressionParser.Pricing.csproj", "{CD01FA7D-1E71-4474-A97A-0F3C422DD1CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionParser.Tests.Common", "src\ExpressionParser.Tests.Common\ExpressionParser.Tests.Common.csproj", "{484B3307-D644-4D3C-86B7-8A5673D4C7CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34433E18-FBE3-4220-8E20-54A8BF911AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34433E18-FBE3-4220-8E20-54A8BF911AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34433E18-FBE3-4220-8E20-54A8BF911AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34433E18-FBE3-4220-8E20-54A8BF911AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D513466E-6203-4CB9-89EF-F68E2FD35FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D513466E-6203-4CB9-89EF-F68E2FD35FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D513466E-6203-4CB9-89EF-F68E2FD35FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D513466E-6203-4CB9-89EF-F68E2FD35FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85520D10-E76A-4B8C-8E08-A3756FBC3315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85520D10-E76A-4B8C-8E08-A3756FBC3315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85520D10-E76A-4B8C-8E08-A3756FBC3315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85520D10-E76A-4B8C-8E08-A3756FBC3315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FE1792F-CAC2-422E-B6E1-53FEA34BEA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE1792F-CAC2-422E-B6E1-53FEA34BEA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE1792F-CAC2-422E-B6E1-53FEA34BEA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE1792F-CAC2-422E-B6E1-53FEA34BEA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D7CFD3E-F808-4369-8DA8-EAF20E68B73A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D7CFD3E-F808-4369-8DA8-EAF20E68B73A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D7CFD3E-F808-4369-8DA8-EAF20E68B73A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D7CFD3E-F808-4369-8DA8-EAF20E68B73A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3817A70A-7C02-49CA-82DC-823C810F4828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3817A70A-7C02-49CA-82DC-823C810F4828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3817A70A-7C02-49CA-82DC-823C810F4828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3817A70A-7C02-49CA-82DC-823C810F4828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD01FA7D-1E71-4474-A97A-0F3C422DD1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD01FA7D-1E71-4474-A97A-0F3C422DD1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD01FA7D-1E71-4474-A97A-0F3C422DD1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD01FA7D-1E71-4474-A97A-0F3C422DD1CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{484B3307-D644-4D3C-86B7-8A5673D4C7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{484B3307-D644-4D3C-86B7-8A5673D4C7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{484B3307-D644-4D3C-86B7-8A5673D4C7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{484B3307-D644-4D3C-86B7-8A5673D4C7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{34433E18-FBE3-4220-8E20-54A8BF911AF6} = {B6031F77-464B-41B6-AE62-FC663849875A}
+		{D513466E-6203-4CB9-89EF-F68E2FD35FC7} = {C2019521-CB20-457D-B05E-BF4097F74EA7}
+		{85520D10-E76A-4B8C-8E08-A3756FBC3315} = {B6031F77-464B-41B6-AE62-FC663849875A}
+		{3FE1792F-CAC2-422E-B6E1-53FEA34BEA05} = {B6031F77-464B-41B6-AE62-FC663849875A}
+		{5D7CFD3E-F808-4369-8DA8-EAF20E68B73A} = {B6031F77-464B-41B6-AE62-FC663849875A}
+		{3817A70A-7C02-49CA-82DC-823C810F4828} = {C2019521-CB20-457D-B05E-BF4097F74EA7}
+		{CD01FA7D-1E71-4474-A97A-0F3C422DD1CD} = {B6031F77-464B-41B6-AE62-FC663849875A}
+		{484B3307-D644-4D3C-86B7-8A5673D4C7CC} = {C2019521-CB20-457D-B05E-BF4097F74EA7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87CA5C74-3083-42DB-8F45-34F49EBE64B4}
+	EndGlobalSection
+EndGlobal

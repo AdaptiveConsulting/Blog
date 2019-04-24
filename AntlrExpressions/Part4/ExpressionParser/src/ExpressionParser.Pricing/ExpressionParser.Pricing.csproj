@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net471</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ExpressionParser.Language\ExpressionParser.Language.csproj" />
+      <ProjectReference Include="..\ExpressionParser.ReferentialData\ExpressionParser.ReferentialData.csproj" />
+    </ItemGroup>
+
+</Project>
